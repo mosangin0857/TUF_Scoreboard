@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>TUF Scoreboard</title>
+<!-- 프릭샷 웹(브라우저) 소스용 송출 화면. /overlay/1 = 스코어보드 1, /overlay/2 = 스코어보드 2 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Gothic+A1:wght@500;700;800;900&family=Noto+Sans+KR:wght@400;700;900&display=swap">
+<link rel="stylesheet" href="/shared/overlay.css">
+<style>
+  [hidden]{display:none!important}
+  html,body{margin:0;padding:0;background:transparent;overflow:hidden;width:100vw;height:100vh}
+  #root{position:fixed;top:0;left:0;transform-origin:top left;transition:opacity .35s ease}
+  #root.off{opacity:0}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="/shared/render.js"></script>
+<script>
+(function(){
+  const N = location.pathname.replace(/\/+$/,'').endsWith('/2') ? 2 : 1;
+  const root = document.getElementById('root');
+  let state = null, lastKey = '';
+
+  // 소스 창 크기에 맞춰 비율 유지 확대·축소 (기존 TFPL_S4 스코어보드와 같은 방식)
+  function fit(){
+    root.style.transform = 'none';
+    const w = root.offsetWidth, h = root.offsetHeight;
+    if(!w || !h) return;
+    root.style.transform = 'scale(' + Math.min(innerWidth / w, innerHeight / h) + ')';
+  }
+
+  function draw(){
+    if(!state || !state.pl || !state.race) return;
+    const out = TUFRender.build(state, lastKey);
+    lastKey = out.key;
+    const cls = N === 1 ? 'sb1' : 'sb2';
+    root.innerHTML = `<div class="${cls} ${out.jc ? 'is-jc' : ''}">${N === 1 ? out.sb1 : out.sb2}</div>`;
+    root.classList.toggle('off', !(N === 1 ? state.pl.show1 : state.pl.show2));
+    fit();
+  }
+
+  // 앱이 꺼졌다 켜져도 새로고침 없이 다시 붙는다. 끊긴 동안에는 마지막 화면을 그대로 둔다.
+  function connect(){
+    const ws = new WebSocket('ws://' + location.host + '/ws');
+    ws.onmessage = (e) => {
+      let m; try { m = JSON.parse(e.data) } catch(err) { return }
+      if(m.type === 'state' && m.state){ state = m.state; draw(); }
+    };
+    ws.onclose = () => setTimeout(connect, 1500);
+  }
+
+  addEventListener('resize', fit);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  connect();
+})();
+</script>
+</body>
+</html>

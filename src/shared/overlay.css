@@ -1,0 +1,91 @@
+/* 스코어보드 1·2 공용 스타일 (조작 화면 미리보기 + 프릭샷 오버레이) */
+:root{
+  --font-sb:"Gothic A1","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --font-num:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+  --race-t:#5cc8ff;
+  --race-z:#ff5d7d;
+  --race-p:#ffd447;
+}
+/* ---------- 스코어보드 1 (개인 경기) ---------- */
+/* 기존 규격(약 330px 폭 원본)을 640px로 1.94배 확대한 비율 그대로.
+   맨 아래 줄 가운데는 비워 둠 → 스타크래프트 미니맵 쪽 게임 타이머가 그대로 비쳐 보임 */
+.sb1{position:relative;width:640px;font-family:var(--font-sb);color:#fff;display:flex;flex-direction:column;align-items:center;text-shadow:0 2px 0 rgba(0,0,0,.45)}
+.sb1-banner{height:30px;display:flex;align-items:center;font-size:19px;font-weight:700;padding:0 26px;background:#0e1630;border:2px solid #35508f;border-bottom:0;border-radius:9px 9px 0 0}
+.sb1-banner.off{visibility:hidden}
+.sb1-box{width:100%;border:2px solid #2a3756;background:#000}
+.sb1-set{height:39px;display:flex;align-items:center;justify-content:center;gap:12px;background:#000;border-bottom:2px solid #2a3756;color:#5fdcff;font-size:23px;font-weight:900;letter-spacing:.04em}
+.sb1-set b{font-family:var(--font-num);font-size:28px;font-weight:800;letter-spacing:.06em}
+.sb1-main{display:grid;grid-template-columns:1fr 136px 1fr;height:68px}
+.sb1-p{display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:800;padding:0 12px;white-space:nowrap;overflow:hidden}
+.sb1-p.a{background:linear-gradient(90deg,#3a0910,#b71f2c)}
+.sb1-p.b{background:linear-gradient(90deg,#2453cc,#0b1a58)}
+.sb1-score{display:flex;align-items:center;justify-content:center;gap:4px;background:#0a0d14}
+.sb1-score i{font-style:normal;width:62px;height:58px;display:grid;place-items:center;background:linear-gradient(#ffffff,#dfe3ea);color:#0a0d14;font-family:var(--font-num);font-size:56px;font-weight:800;line-height:1;text-shadow:none}
+.sb1-score i.pop{animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(1)}35%{transform:scale(1.18);background:#fff6c2}100%{transform:scale(1)}}
+.sb1-sub{width:100%;display:flex;justify-content:space-between;height:58px}
+.sb1-race{width:194px;height:100%;background:#2a3756}
+.sb1-race.a{padding:0 0 2px 2px;clip-path:polygon(0 0,100% 0,146px 100%,0 100%)}
+.sb1-race.b{padding:0 2px 2px 0;clip-path:polygon(0 0,100% 0,100% 100%,48px 100%)}
+.sb1-race span{display:grid;place-items:center;height:100%;background:#000;font-family:var(--font-num);font-size:30px;font-weight:800}
+/* 종족최강전: 점수칸 없이 닉네임만 */
+.sb1-main.names{grid-template-columns:1fr 1fr}
+.sb1-main.names .sb1-p.b{border-left:2px solid #2a3756}
+.sb1-race span b{font-weight:800}
+.sb1-race span{gap:10px;grid-auto-flow:column}
+.sb1-race.a span{color:#ff3e4b;padding-right:40px;clip-path:polygon(0 0,calc(100% - 2px) 0,143px 100%,0 100%)}
+.sb1-race.b span{color:#4a83ff;padding-left:40px;clip-path:polygon(2px 0,100% 0,100% 100%,51px 100%)}
+
+/* ---------- 스코어보드 2 (엔트리 표) ---------- */
+.sb2{width:390px;font-family:var(--font-sb);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.55)}
+.sb2-title{text-align:center;font-size:21px;font-weight:700;padding:4px 8px;background:rgba(0,0,0,.55);margin-bottom:6px;border-radius:3px}
+.sb2-head{display:flex;align-items:center;justify-content:center;gap:10px;font-size:28px;font-weight:800;padding:6px 10px;border:2px solid rgba(255,255,255,.78);background:rgba(10,12,18,.8)}
+.sb2-head .sw{font-family:var(--font-num);font-size:26px;color:#9fe6ff}
+.sb2-head .sc{font-family:var(--font-num);font-size:36px;letter-spacing:.06em;padding:0 4px}
+.sb2-rows{border:2px solid rgba(255,255,255,.78);border-top:0}
+.sb2-row{display:grid;grid-template-columns:44px 1fr 54px 1fr;height:47px;border-top:1px solid rgba(255,255,255,.28);background:rgba(16,19,27,.72)}
+.sb2-row>div{display:grid;place-items:center;font-size:24px;font-weight:800;white-space:nowrap;overflow:hidden}
+.sb2-no{background:rgba(0,0,0,.7);font-family:var(--font-num);font-size:26px!important}
+.sb2-row.cur .sb2-no{background:#1fa8dd;color:#03141c;text-shadow:none}
+.sb2-row.cur{background:rgba(31,168,221,.16)}
+.sb2-map{color:#cfd4dd;font-size:22px!important;font-weight:700!important}
+.n-pend{color:#e3e7ee}
+.n-lose{color:#757b86}
+.n-T{color:var(--race-t)}.n-Z{color:var(--race-z)}.n-P{color:var(--race-p)}
+
+/* ---------- 종족최강전: 기존 스코어보드 1·2 (TFPL_S4/bj/종최) 그대로 ---------- */
+.sb1.is-jc,.sb2.is-jc{width:auto;display:block;text-shadow:none}
+.jc1{zoom:2;position:relative;width:317px;height:100px;font-family:"Noto Sans KR",sans-serif;
+  clip-path:polygon(0px 0px,317px 0px,317px 100px,247px 100px,226px 66px,91px 66px,70px 100px,0px 100px);
+  display:flex;flex-direction:column;border-radius:8px 8px 0 0;overflow:hidden}
+.jc1-top{background:rgba(8,8,12,.90);border:1px solid rgba(255,255,255,.12);border-bottom:none;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between;padding:6px 14px 6px 40px;flex-shrink:0}
+.jc1-top span{font-size:12px;font-weight:900;color:#fff;letter-spacing:1.5px}
+.jc1-line{height:1px;background:rgba(255,255,255,.10);flex-shrink:0}
+.jc1-row{background:rgba(255,255,255,.90);border-left:1px solid rgba(255,255,255,.12);border-right:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;padding:4px 14px;flex-shrink:0}
+.jc1-name{font-size:18px;font-weight:900;width:130px;letter-spacing:.5px;color:#12141a;white-space:nowrap;overflow:hidden}
+.jc1-name.l{text-align:left;padding-left:4px}
+.jc1-name.r{text-align:right;padding-right:4px}
+.jc1-bot{background:rgba(8,8,12,.90);border-left:1px solid rgba(255,255,255,.12);border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;height:34px;flex-shrink:0;padding:0 8px}
+.jc1-pg{display:flex;align-items:center;gap:5px;width:90px}
+.jc1-pg.r{justify-content:flex-end}
+.jc1-pos{font-size:16px;font-weight:700;letter-spacing:1px;color:rgba(78,126,168,.95)}
+.jc1-pg.l .jc1-pos{padding-left:6px}
+.jc1-pg.r .jc1-pos{padding-right:6px}
+.jc1-sp{flex:1}
+/* 킬: 배지 없이 숫자만. 위치(종족색)와 구분선으로 나누고 주황 굵은 글씨, 3K부터 금색 */
+.jk{font-size:17px;font-weight:900;line-height:1;letter-spacing:.3px;color:#ff9a2e;text-shadow:0 1px 2px rgba(0,0,0,.95);flex-shrink:0}
+.jk small{font-size:12px;font-weight:900;margin-left:1px}
+.jk.hot{color:#ffd84a;text-shadow:0 0 7px rgba(255,190,0,.75),0 1px 2px #000}
+.jk.pop{animation:jkpop .5s ease}
+@keyframes jkpop{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+.jsep{width:1px;height:15px;background:rgba(255,255,255,.35);flex-shrink:0}
+.jk-old{font-size:11px;font-weight:900;color:#fff;background:linear-gradient(135deg,rgba(255,90,20,.95),rgba(180,20,20,.95));border:1px solid rgba(255,255,255,.35);border-radius:3px;padding:1px 5px;letter-spacing:.5px}
+.jc2{zoom:1.2;display:flex;flex-direction:column;gap:4px;font-family:"Noto Sans KR",sans-serif}
+.jc2-row{display:flex;align-items:stretch;gap:4px}
+.jc2-chip{width:40px;flex-shrink:0;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#0a0c10}
+.jc2-chip.T{background:rgba(85,153,255,.80)}.jc2-chip.P{background:rgba(255,215,0,.80)}.jc2-chip.Z{background:rgba(255,68,68,.80)}
+.jc2-name{width:110px;background:rgba(8,8,12,.80);border:1px solid rgba(255,255,255,.12);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 6px;position:relative;min-height:24px}
+.jc2-row.T .jc2-name{border-color:rgba(85,153,255,.45)}.jc2-row.P .jc2-name{border-color:rgba(255,215,0,.45)}.jc2-row.Z .jc2-name{border-color:rgba(255,68,68,.45)}
+.jc2-name.dead{color:rgba(140,148,160,.55)!important;background:rgba(8,8,12,.55);border-color:rgba(255,255,255,.08)!important}
+.jc2-name.dead::after{content:"";position:absolute;left:8%;right:8%;top:50%;height:2px;background:rgba(210,216,226,.75);transform:translateY(-50%) rotate(-3deg)}
+.jc2-prize{background:linear-gradient(90deg,rgba(255,215,0,.16),rgba(255,215,0,.28),rgba(255,215,0,.16));border:1px solid rgba(255,215,0,.55);border-radius:5px;text-align:center;padding:5px 0;font-size:13px;font-weight:900;color:#FFD700;letter-spacing:.5px;text-shadow:0 0 8px rgba(255,215,0,.35)}

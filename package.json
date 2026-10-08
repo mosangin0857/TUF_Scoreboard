@@ -1,0 +1,65 @@
+{
+  "name": "tuf-scoreboard",
+  "productName": "TUF Scoreboard",
+  "version": "0.1.0",
+  "description": "TUF 클랜 방송용 스코어보드 (SOOP 프릭샷 웹 소스)",
+  "main": "electron/main.js",
+  "author": "mosangin0857",
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://github.com/mosangin0857/TUF_Scoreboard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mosangin0857/TUF_Scoreboard.git"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --publish never",
+    "release": "electron-builder --win --publish always"
+  },
+  "build": {
+    "appId": "com.tuf.scoreboard",
+    "productName": "TUF Scoreboard",
+    "files": [
+      "electron/**",
+      "src/**",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.png",
+      "artifactName": "TUF_Scoreboard_Setup_${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "TUF Scoreboard",
+      "runAfterFinish": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "mosangin0857",
+        "repo": "TUF_Scoreboard",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "electron": "^38.8.6",
+    "electron-builder": "^26.15.3"
+  }
+}
