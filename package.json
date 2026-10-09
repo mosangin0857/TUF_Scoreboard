@@ -1,7 +1,7 @@
 {
   "name": "tuf-scoreboard",
   "productName": "TUF Scoreboard",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TUF 클랜 방송용 스코어보드 (SOOP 프릭샷 웹 소스)",
   "main": "electron/main.js",
   "author": "mosangin0857",
