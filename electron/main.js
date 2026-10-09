@@ -162,7 +162,8 @@ ipcMain.handle('update:install', () => {
   if (updateStatus.state !== 'ready') return false;
   quitting = true;
   if (server) server.flush();
-  autoUpdater.quitAndInstall(false, true);
+  // 설치 화면 없이 조용히 덮어쓰고 바로 다시 실행 (BJ 입장에서는 재시작만 한 것처럼 보임)
+  autoUpdater.quitAndInstall(true, true);
   return true;
 });
 
