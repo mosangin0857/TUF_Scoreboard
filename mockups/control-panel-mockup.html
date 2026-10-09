@@ -260,8 +260,8 @@ button{cursor:pointer}
 .mode p{color:var(--muted);font-size:13px}
 .mode .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .mode .glyph{position:absolute;right:-6px;top:-12px;font-family:var(--font-num);font-weight:800;font-size:96px;line-height:1;opacity:.08;letter-spacing:-.02em}
-.mode.pl{border-color:#2b5a73;background:linear-gradient(160deg,#16303f,var(--surface-2) 60%)}
-.mode.pl .glyph{opacity:.14;color:var(--accent)}
+.mode.mode-pl{border-color:#2b5a73;background:linear-gradient(160deg,#16303f,var(--surface-2) 60%)}
+.mode.mode-pl .glyph{opacity:.14;color:var(--accent)}
 .resume{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px dashed var(--line);border-radius:6px}
 .home-msg{font-size:13px;color:var(--race-p)}
 
@@ -569,7 +569,7 @@ table.cmp td:first-child{font-weight:700;white-space:nowrap}
                 <p>종족별 승자연전. 스코어보드 1·2는 지금 쓰던 디자인 그대로, 조작패널만 새로 바꿨습니다.</p>
                 <span class="foot"><span class="muted" style="font-size:12px">스코어보드 2개</span><span class="btn sm">열기</span></span>
               </button>
-              <button class="mode pl" data-act="mode" data-mode="pl">
+              <button class="mode mode-pl" data-act="mode" data-mode="pl">
                 <span class="glyph">VS</span>
                 <span class="tag" style="color:var(--accent);border-color:#2b5a73">개선된 패널</span>
                 <span class="big">프로리그</span>
